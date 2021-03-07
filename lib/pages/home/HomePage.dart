@@ -79,17 +79,6 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                     child: Wrap(
                       children: [
                         containerDummy(width),
-                        containerDummy(width),
-                        containerDummy(width),
-                        containerDummy(width),
-                        containerDummy(width),
-                        containerDummy(width),
-                        containerDummy(width),
-                        containerDummy(width),
-                        containerDummy(width),
-                        containerDummy(width),
-                        containerDummy(width),
-                        containerDummy(width),
                         
                       ],
                     ),
@@ -97,17 +86,6 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                   Container(
                     child: Wrap(
                       children: [
-                        containerDummy(width),
-                        containerDummy(width),
-                        containerDummy(width),
-                        containerDummy(width),
-                        containerDummy(width),
-                        containerDummy(width),
-                        containerDummy(width),
-                        containerDummy(width),
-                        containerDummy(width),
-                        containerDummy(width),
-                        containerDummy(width),
                         containerDummy(width),
                       ],
                     ),
@@ -131,30 +109,6 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
       SizedBox(height: height * .03,),
     ];
   }
-
-    /**
-   return SingleChildScrollView(
-    child: Stack(
-        children: <Widget>[
-          Container(
-            height: constraints.maxHeight,
-            padding: horizontalScaffoldPadding(context),
-            child: Column(
-              children: <Widget> [
-                SizedBox(height: height * .04),
-                ProfileWidget(height: height, width: width),
-                SizedBox(height: height * .02),
-                ShopButton.blue(width: width, title: "Ver catálogo",),
-                SizedBox(height: height * .03,),
-                AboutMarketButtons(witdth: width,),
-                SizedBox(height: height * .03,),
-              ],
-            ),
-          ),
-        ], 
-      )
-    );
-   */
 }
 
 class _StickyTabBarDelegate extends SliverPersistentHeaderDelegate {
