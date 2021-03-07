@@ -31,23 +31,6 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
           body: CustomScrollView(
             slivers: <Widget>[
               
-              /*SliverAppBar(
-                //pinned: true,
-                floating: false,
-                expandedHeight: 120.0,
-                centerTitle: true,
-                flexibleSpace: FlexibleSpaceBar(
-                  title: Text('Basic Slivers'),
-                ),
-              ),*/
-              /*SliverFixedExtentList(
-                itemExtent: 50,
-                delegate: SliverChildListDelegate([
-                  Container(color: Colors.red),
-                  Container(color: Colors.green),
-                  Container(color: Colors.blue),
-                ]),
-              ),*/
               SliverList(
                 delegate: SliverChildBuilderDelegate(
                   (context, index) {
