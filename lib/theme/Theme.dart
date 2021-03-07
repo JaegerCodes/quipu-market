@@ -1,0 +1,135 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:quipumarket/theme/Colors.dart';
+import 'package:quipumarket/theme/TextTheme.dart';
+
+
+ThemeData theme = ThemeData(
+  brightness: Brightness.light,
+  visualDensity: VisualDensity(vertical: 0.5, horizontal: 0.5),
+  primarySwatch: MaterialColor(
+    0xffDEDEDE,
+    <int, Color> {
+      50: Color(0xFFFFFFFF),
+      100: Color(0xFFFAFAFA),
+      200: Color(0xffF5F5F5),
+      300: Color(0xffF0F0F0),
+      400: Color(0xffDEDEDE),
+      500: Color(0xffC2C2C2),
+      600: Color(0xff979797),
+      700: Color(0xff818181),
+      800: Color(0xff606060),
+      900: Color(0xff3C3C3C),
+    },
+  ),
+  primaryColor: ColorTheme.WHITE_500,
+  primaryColorBrightness: Brightness.light,
+  primaryColorLight: ColorTheme.WHITE_100,
+  primaryColorDark: ColorTheme.WHITE_900,
+  canvasColor: ColorTheme.BLUE_500,
+  accentColor: ColorTheme.BLUE_500,
+  accentColorBrightness: Brightness.light,
+  scaffoldBackgroundColor: ColorTheme.WHITE_50,
+  bottomAppBarColor: ColorTheme.WHITE_50,
+  cardColor: ColorTheme.WHITE_100,
+  dividerColor: ColorTheme.WHITE_800,
+  focusColor: Colors.red,
+  hoverColor: ColorTheme.BLUE_50,
+  highlightColor: ColorTheme.BLUE_800,
+  splashColor: ColorTheme.BLUE_800,
+  // splashFactory: # override create method from  InteractiveInkFeatureFactory
+  selectedRowColor: Colors.grey,
+  unselectedWidgetColor: Colors.grey.shade400,
+  disabledColor: Colors.grey.shade200,
+  // buttonTheme: ButtonThemeData(//button themes),
+  // toggleButtonsTheme: ToggleButtonsThemeData(//toggle button theme),
+  // buttonColor: ColorTheme.BLUE_500,
+  secondaryHeaderColor: Colors.grey,
+  backgroundColor: ColorTheme.WHITE_50,
+  dialogBackgroundColor: ColorTheme.WHITE_100,
+  indicatorColor: ColorTheme.BLUE_200,
+  hintColor: Colors.grey,
+  errorColor: Colors.red,
+  toggleableActiveColor: ColorTheme.BLUE_500,
+  textTheme: textTheme(color: ColorTheme.WHITE_900),
+  // elevatedButtonTheme: ElevatedButtonThemeData(
+  //  style: TextButton.styleFrom(
+      // backgroundColor: Colors.black,
+      // padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+      // side: BorderSide(color: Colors.red, width: 2),
+      // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+  //    textStyle: TextStyle(
+  //      color: Colors.white,
+  //      fontSize: 20,
+  //      wordSpacing: 2,
+  //      letterSpacing: 2
+  //    )
+  //  )
+  //),
+  // primaryTextTheme: TextTheme(//text theme that contrast with primary color),
+  // accentTextTheme: TextTheme(//text theme that contrast with accent Color),
+  // inputDecorationTheme: InputDecorationTheme(// default values for InputDecorator, TextField, and TextFormField),
+  // iconTheme: IconThemeData(//icon themes that contrast with card and canvas),
+  // primaryIconTheme: IconThemeData(//icon themes that contrast primary color),
+  // accentIconTheme: IconThemeData(//icon themes that contrast accent color),
+  // sliderTheme: SliderThemeData(// slider themes),
+  // tabBarTheme: TabBarTheme(// tab bat theme),
+  // tooltipTheme: TooltipThemeData(// tool tip theme),
+  // cardTheme: CardTheme(// card theme),
+  chipTheme: ChipThemeData(
+    backgroundColor: ColorTheme.BLUE_800,
+    disabledColor: ColorTheme.WHITE_200,
+    shape: StadiumBorder(),
+    brightness: Brightness.light,
+    labelPadding: EdgeInsets.all(8),
+    labelStyle: TextStyle(),
+    padding: EdgeInsets.all(8),
+    secondaryLabelStyle: TextStyle(),
+    secondarySelectedColor: Colors.white38,
+    selectedColor: Colors.white),
+  platform: TargetPlatform.android,
+  materialTapTargetSize: MaterialTapTargetSize.padded,
+  applyElevationOverlayColor: true,
+  // pageTransitionsTheme: PageTransitionsTheme(//page transition theme),
+  appBarTheme: AppBarTheme(
+    color: ColorTheme.WHITE_50,
+    textTheme: TextTheme(
+      headline6: GoogleFonts.raleway(
+        fontSize: 20,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 0.15,
+        color: ColorTheme.WHITE_900,
+      ),
+    ),
+    elevation: 0
+  ),
+  // bottomAppBarTheme: BottomAppBarTheme(// bottom app bar theme),
+  colorScheme: ColorScheme(
+    primary: ColorTheme.WHITE_500,
+    primaryVariant: ColorTheme.WHITE_700,
+    secondary: ColorTheme.BLUE_200,
+    secondaryVariant: ColorTheme.BLUE_500,
+    brightness: Brightness.light,
+    background: ColorTheme.WHITE_50,
+    error: Color(0xffB00020),
+    onBackground: ColorTheme.WHITE_50,
+    onError: Color(0xffCf6679),
+    onPrimary: ColorTheme.WHITE_50,
+    onSecondary: ColorTheme.WHITE_900,
+    onSurface: ColorTheme.WHITE_900,
+    surface: ColorTheme.WHITE_50),
+    // snackBarTheme: SnackBarThemeData(// snack bar theme),
+    // dialogTheme: DialogTheme(// dialog theme),
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: ColorTheme.WHITE_100
+    ),
+    // navigationRailTheme: NavigationRailThemeData(// navigation rail theme),
+    typography: Typography.material2018(),
+    // cupertinoOverrideTheme: CupertinoThemeData(// cupertino theme),
+    // bottomSheetTheme: BottomSheetThemeData(// bottom sheet theme),
+    // popupMenuTheme: PopupMenuThemeData(// pop menu theme),
+    // bannerTheme: MaterialBannerThemeData(// material banner theme),
+    // dividerTheme: DividerThemeData(// divider, vertical divider theme),
+    // buttonBarTheme: ButtonBarThemeData(// button bar theme),
+  splashFactory: InkSplash.splashFactory);
