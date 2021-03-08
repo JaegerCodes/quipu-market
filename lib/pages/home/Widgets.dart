@@ -52,7 +52,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               child: Align(
                                 alignment: Alignment.centerLeft,
                                 child: Text(
-                                  '@laritza_oficial',
+                                  '#laritza_oficial',
                                   style: TextStyle(fontWeight: FontWeight.w800, color: Colors.blue[700]),
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
@@ -208,3 +208,44 @@ class _BannerWidgetState extends State<BannerWidget> {
     );
   }
 }
+
+class GridGallery extends StatefulWidget {
+  GridGallery({this.width = 0});
+
+  final double width;
+
+  @override
+  _GridGalleryState createState() => _GridGalleryState();
+}
+
+class _GridGalleryState extends State<GridGallery> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: GridView.builder(
+        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+          maxCrossAxisExtent: widget.width/3,
+          mainAxisExtent: widget.width/3,
+          childAspectRatio: 3 / 2,
+          crossAxisSpacing: 1,
+          mainAxisSpacing: 1),
+        itemCount: myProducts.length,
+        itemBuilder: (BuildContext ctx, index) {
+          return Container(
+            width: widget.width/3,
+            height: widget.width/3,
+            alignment: Alignment.center,
+            child: Text(myProducts[index]["name"]),
+            decoration: BoxDecoration(
+              color: Colors.amber,
+              borderRadius: BorderRadius.circular(1)
+            ),
+          );
+        }),
+    );
+  }
+}
+
+final List<Map> myProducts =
+      List.generate(200, (index) => {"id": index, "name": "Product $index"})
+          .toList();

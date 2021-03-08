@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quipumarket/pages/home/Widgets.dart';
+import 'package:quipumarket/theme/Colors.dart';
+import 'package:quipumarket/theme/Dimens.dart';
 import 'package:quipumarket/theme/Styles.dart';
 
 class HomePage extends StatefulWidget {
@@ -23,62 +25,66 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
     
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-    
-    return DefaultTabController(
-      length: 2,
-      child: SafeArea(
-        child: Scaffold(
-          body: CustomScrollView(
-            slivers: <Widget>[
-              
-              SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  (context, index) {
-                    return getMarketPresentationWidgets(width: width, height: height,)[index];
-                  },
-                  childCount: getMarketPresentationWidgets(width: width, height: height,).length,
-                ),
-              ),
-              SliverPersistentHeader(
-                pinned: true,
-                floating: true,
-                delegate: _StickyTabBarDelegate(
-                  TabBar(
-                    controller: _controller,
-                    tabs: <Widget>[
-                      Tab(
-                        text: "Novedades",
-                      ),
-                      Tab(
-                        text: "Ofertas",
-                      )
-                    ],
-                  ),
-                )
-              ),
-              SliverFillRemaining(
-                child: TabBarView(controller: _controller, children: <Widget> [
+
+    return SafeArea(
+      child: Scaffold(
+        body: CustomScrollView(slivers: [
+          // SliverAppBar(title: Text("SomeTitle"), backgroundColor: Colors.black, pinned: true,),
+          SliverList(
+            delegate: SliverChildListDelegate( <Widget> [
+              SizedBox(height: height * .02),
+              ProfileWidget(height: height, width: width),
+              SizedBox(height: height * .02),
+              ShopButton.blue(width: width, title: "Ver catálogo",),
+              SizedBox(height: height * .03,),
+              Wrap(
+                children: [
                   Container(
-                    child: Wrap(
-                      children: [
-                        containerDummy(width),
-                        
-                      ],
-                    ),
+                    margin: EdgeInsets.only(left: horizontalPaddingPercent * width),
+                    child: StyledButton(title: 'Delivery', width: width/3 - 20,)
                   ),
                   Container(
-                    child: Wrap(
-                      children: [
-                        containerDummy(width),
-                      ],
-                    ),
+                    margin: EdgeInsets.only(left: horizontalPaddingPercent * width, right: horizontalPaddingPercent * width),
+                    child: StyledButton(title: 'Ubícanos', width: width/3 - 20,)
+                  ) ,
+                  Container(
+                    margin: EdgeInsets.only(right: horizontalPaddingPercent * width),
+                    child: StyledButton(title: 'Contacto', width: width/3 - 20,)
                   ),
-              ])),
-              
-            ],
+                ],
+              ),
+              // AboutMarketButtons(witdth: width,),
+              SizedBox(height: height * .03,),
+            ])
           ),
-        ),
-      )
+          SliverPersistentHeader(
+            pinned: true,
+            delegate: _StickyTabBarDelegate(
+              TabBar(
+                // indicatorSize: TabBarIndicatorSize.label,
+                controller: _controller,
+                tabs: <Widget>[
+                  Tab(
+                    text: "Publicaciones",
+                  ),
+                  Tab(
+                    text: "Descuentos",
+                  )
+                ],
+              ),
+          )),
+          SliverPersistentHeader(
+            pinned: false,
+            delegate: _StickyWidgetDelegate(
+              TabBarView(controller: _controller, children: <Widget> [
+                GridGallery(width: width,),
+                GridGallery(width: width,),
+              ]),
+              height
+            )
+          ),
+        ]),
+      ),
     );
   }
   List<Widget> getMarketPresentationWidgets({double width = 0, double height = 0}) {
@@ -111,12 +117,39 @@ class _StickyTabBarDelegate extends SliverPersistentHeaderDelegate {
     double shrinkOffset,
     bool overlapsContent,
   ) {
-    return Container(child: tabBar);
+    return Container(child: tabBar, color: ColorTheme.WHITE_900,);
   }
 
   @override
   bool shouldRebuild(_StickyTabBarDelegate oldDelegate) {
     return tabBar != oldDelegate.tabBar;
+  }
+}
+
+class _StickyWidgetDelegate extends SliverPersistentHeaderDelegate {
+  const _StickyWidgetDelegate(this.widget, this.height);
+
+  final Widget widget;
+  final double height;
+
+  @override
+  double get minExtent => height;
+
+  @override
+  double get maxExtent => height;
+
+  @override
+  Widget build(
+    BuildContext context,
+    double shrinkOffset,
+    bool overlapsContent,
+  ) {
+    return Container(child: widget);
+  }
+
+  @override
+  bool shouldRebuild(_StickyWidgetDelegate oldDelegate) {
+    return widget != oldDelegate.widget;
   }
 }
 
@@ -136,6 +169,15 @@ Widget containerDummy(double width){
     ),
   );
 }
+
+List<Widget> someTextWidgets() {
+  List<Widget> output = [];
+  for (var i = 0; i <= 100; i++) {
+    output.add(Text(i.toString()));
+  }
+  return output;
+}
+
 
 
 

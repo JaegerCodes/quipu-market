@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         'home' : ( BuildContext context ) => HomePage(),
         'demo' : ( BuildContext context ) => DemoPage(),
       },
-      theme: theme,
+      theme: darkTheme,
       darkTheme: darkTheme,
       themeMode: ThemeMode.dark,
     );
