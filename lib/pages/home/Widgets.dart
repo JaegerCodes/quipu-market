@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:quipumarket/theme/Colors.dart';
 import 'package:quipumarket/theme/Dimens.dart';
-import 'package:quipumarket/theme/Styles.dart';
+import 'package:quipumarket/widgets/Buttons.dart';
 
 class ProfileWidget extends StatefulWidget {
   
@@ -57,7 +58,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                 ),
-                              )
+                              ),
                             ),
                           ],
                         ),
@@ -105,8 +106,8 @@ class _ProfileWidgetState extends State<ProfileWidget> {
         child: Container(
         ),
         fit: BoxFit.cover,
-        width: widget.width * 0.25,
-        height: widget.width * 0.25,
+        width: 100, //
+        height: 100,
       ),
     );
   }
@@ -161,8 +162,6 @@ class AboutMarketButtonsState extends State<AboutMarketButtons> {
 
   }
 }
-
-
 class BannerWidget extends StatefulWidget {
 
   BannerWidget({
@@ -209,16 +208,16 @@ class _BannerWidgetState extends State<BannerWidget> {
   }
 }
 
-class GridGallery extends StatefulWidget {
-  GridGallery({this.width = 0});
+class GridPosts extends StatefulWidget {
+  GridPosts({this.width = 0});
 
   final double width;
 
   @override
-  _GridGalleryState createState() => _GridGalleryState();
+  _GridPostsState createState() => _GridPostsState();
 }
 
-class _GridGalleryState extends State<GridGallery> {
+class _GridPostsState extends State<GridPosts> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -227,17 +226,18 @@ class _GridGalleryState extends State<GridGallery> {
           maxCrossAxisExtent: widget.width/3,
           mainAxisExtent: widget.width/3,
           childAspectRatio: 3 / 2,
-          crossAxisSpacing: 1,
-          mainAxisSpacing: 1),
+          crossAxisSpacing: 0,
+          mainAxisSpacing: 0),
         itemCount: myProducts.length,
         itemBuilder: (BuildContext ctx, index) {
           return Container(
             width: widget.width/3,
             height: widget.width/3,
             alignment: Alignment.center,
-            child: Text(myProducts[index]["name"]),
+            child: Text(myProducts[index]["name"], style: TextStyle(color: ColorTheme.WHITE_900),),
             decoration: BoxDecoration(
-              color: Colors.amber,
+              border: Border.all(color: ColorTheme.WHITE_900, width: 0.4),
+              color: ColorTheme.WHITE_50,
               borderRadius: BorderRadius.circular(1)
             ),
           );

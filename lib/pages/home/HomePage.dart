@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:quipumarket/pages/home/Widgets.dart';
-import 'package:quipumarket/theme/Colors.dart';
 import 'package:quipumarket/theme/Dimens.dart';
-import 'package:quipumarket/theme/Styles.dart';
+import 'package:quipumarket/widgets/Buttons.dart';
+import 'package:quipumarket/widgets/Slivers.dart';
 
 class HomePage extends StatefulWidget {
 
@@ -31,55 +31,24 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
         body: CustomScrollView(slivers: [
           // SliverAppBar(title: Text("SomeTitle"), backgroundColor: Colors.black, pinned: true,),
           SliverList(
-            delegate: SliverChildListDelegate( <Widget> [
-              SizedBox(height: height * .02),
-              ProfileWidget(height: height, width: width),
-              SizedBox(height: height * .02),
-              ShopButton.blue(width: width, title: "Ver catálogo",),
-              SizedBox(height: height * .03,),
-              Wrap(
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(left: horizontalPaddingPercent * width),
-                    child: StyledButton(title: 'Delivery', width: width/3 - 20,)
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(left: horizontalPaddingPercent * width, right: horizontalPaddingPercent * width),
-                    child: StyledButton(title: 'Ubícanos', width: width/3 - 20,)
-                  ) ,
-                  Container(
-                    margin: EdgeInsets.only(right: horizontalPaddingPercent * width),
-                    child: StyledButton(title: 'Contacto', width: width/3 - 20,)
-                  ),
-                ],
-              ),
-              // AboutMarketButtons(witdth: width,),
-              SizedBox(height: height * .03,),
-            ])
+            delegate: SliverChildListDelegate( getMarketPresentationWidgets(width: width, height: height) )
           ),
           SliverPersistentHeader(
             pinned: true,
-            delegate: _StickyTabBarDelegate(
+            delegate: StickyTabBarDelegate(
               TabBar(
                 // indicatorSize: TabBarIndicatorSize.label,
                 controller: _controller,
                 tabs: <Widget>[
-                  Tab(
-                    text: "Publicaciones",
-                  ),
-                  Tab(
-                    text: "Descuentos",
-                  )
+                  Container(height: kTextTabBarHeight, child: Icon(Icons.grid_on)),
+                  Container(height: kTextTabBarHeight, child: Icon(Icons.local_offer)),
                 ],
               ),
           )),
           SliverPersistentHeader(
             pinned: false,
-            delegate: _StickyWidgetDelegate(
-              TabBarView(controller: _controller, children: <Widget> [
-                GridGallery(width: width,),
-                GridGallery(width: width,),
-              ]),
+            delegate: StickyWidgetDelegate(
+              tabViews(width: width),
               height
             )
           ),
@@ -87,96 +56,43 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
       ),
     );
   }
+  
   List<Widget> getMarketPresentationWidgets({double width = 0, double height = 0}) {
     return [
-      SizedBox(height: height * .04),
-      ProfileWidget(height: height, width: width),
-      SizedBox(height: height * .02),
-      ShopButton.blue(width: width, title: "Ver catálogo",),
-      SizedBox(height: height * .03,),
-      AboutMarketButtons(witdth: width,),
-      SizedBox(height: height * .03,),
+        SizedBox(height: height * .02),
+        ProfileWidget(height: height, width: width),
+        SizedBox(height: height * .02),
+        ShopButton.blue(width: width, title: "Ver catálogo",),
+        SizedBox(height: height * .03,),
+        Wrap(
+          children: [
+            Container(
+              margin: EdgeInsets.only(left: horizontalPaddingPercent * width),
+              child: StyledButton(title: 'Delivery', width: width/3 - 20,)
+            ),
+            Container(
+              margin: EdgeInsets.only(left: horizontalPaddingPercent * width, right: horizontalPaddingPercent * width),
+              child: StyledButton(title: 'Ubícanos', width: width/3 - 20,)
+            ) ,
+            Container(
+              margin: EdgeInsets.only(right: horizontalPaddingPercent * width),
+              child: StyledButton(title: 'Contacto', width: width/3 - 20,)
+            ),
+          ],
+        ),
+        // AboutMarketButtons(witdth: width,),
+        SizedBox(height: height * .03,),
     ];
   }
-}
 
-class _StickyTabBarDelegate extends SliverPersistentHeaderDelegate {
-  const _StickyTabBarDelegate(this.tabBar);
-
-  final TabBar tabBar;
-
-  @override
-  double get minExtent => tabBar.preferredSize.height;
-
-  @override
-  double get maxExtent => tabBar.preferredSize.height;
-
-  @override
-  Widget build(
-    BuildContext context,
-    double shrinkOffset,
-    bool overlapsContent,
-  ) {
-    return Container(child: tabBar, color: ColorTheme.WHITE_900,);
-  }
-
-  @override
-  bool shouldRebuild(_StickyTabBarDelegate oldDelegate) {
-    return tabBar != oldDelegate.tabBar;
+  Widget tabViews({double width = 0}) {
+    return TabBarView(controller: _controller, children: <Widget> [
+      GridPosts(width: width,),
+      GridPosts(width: width,),
+    ]);
   }
 }
 
-class _StickyWidgetDelegate extends SliverPersistentHeaderDelegate {
-  const _StickyWidgetDelegate(this.widget, this.height);
-
-  final Widget widget;
-  final double height;
-
-  @override
-  double get minExtent => height;
-
-  @override
-  double get maxExtent => height;
-
-  @override
-  Widget build(
-    BuildContext context,
-    double shrinkOffset,
-    bool overlapsContent,
-  ) {
-    return Container(child: widget);
-  }
-
-  @override
-  bool shouldRebuild(_StickyWidgetDelegate oldDelegate) {
-    return widget != oldDelegate.widget;
-  }
-}
-
-Widget containerDummy(double width){
-  return Container(
-    child: Container(
-      width: width/3,
-      height: width/3,
-      child: Container(
-        margin: EdgeInsets.all(0.5),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(1)
-        ),
-        child: Text("6"),
-      )
-    ),
-  );
-}
-
-List<Widget> someTextWidgets() {
-  List<Widget> output = [];
-  for (var i = 0; i <= 100; i++) {
-    output.add(Text(i.toString()));
-  }
-  return output;
-}
 
 
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quipumarket/pages/demo/DemoPage.dart';
 import 'package:quipumarket/pages/home/HomePage.dart';
+import 'package:quipumarket/pages/market/MarketPage.dart';
 import 'package:quipumarket/theme/DarkTheme.dart';
 import 'package:quipumarket/theme/Theme.dart';
 
@@ -15,12 +16,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Quipu Market',
-      initialRoute: 'home',
+      initialRoute: 'market',
       routes: {
         'home' : ( BuildContext context ) => HomePage(),
+        'market' : ( BuildContext context ) => MarketPage(),
         'demo' : ( BuildContext context ) => DemoPage(),
       },
-      theme: darkTheme,
+      theme: theme,
       darkTheme: darkTheme,
       themeMode: ThemeMode.dark,
     );
