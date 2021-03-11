@@ -13,24 +13,26 @@ class ProductCard extends StatefulWidget {
 class _ProductCardState extends State<ProductCard> {
   @override
   Widget build(BuildContext context) {
+    final imageHeigth = MediaQuery.of(context).size.height * 0.25;
+
     final product = widget.product?? { "id": "", "url": "", "title" : "" };
     
     return Container(
-      padding: EdgeInsets.all(8),
+      padding: EdgeInsets.only(left: 4, top: 8, right: 4),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(5),
         child: Column(
           children: [
             FadeInImage(
               width: double.infinity,
-              height: 150,
+              height: imageHeigth,
               placeholder: AssetImage('assets/no-image.jpg'),
               image: NetworkImage( product["url"] ),
               fit: BoxFit.cover,
             ),
             SizedBox(height: 10,),
             Container(width: double.infinity, child: Text(product["title"], maxLines: 2, textAlign: TextAlign.start,)),
-            SizedBox(height: 1,),
+            SizedBox(height: 2,),
             Align(
               alignment: Alignment.topLeft,
               child: Container(
@@ -51,26 +53,6 @@ class _ProductCardState extends State<ProductCard> {
                 ),
               ),
             )
-            /*Stack(
-              children: [
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: Container(
-                    padding: EdgeInsets.only(right: 10),
-                    width: widget.width/4, child: FittedBox(
-                      child: Text("S/200.00", maxLines: 1, textAlign: TextAlign.start, style: TextStyle(fontSize: 0.7, color: Colors.blue),))
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.topRight,
-                  child: Container(
-                    padding: EdgeInsets.only(left: 10),
-                    width: widget.width/4, child: FittedBox(
-                      child: Text("S/320.00", maxLines: 1, textAlign: TextAlign.start, style: TextStyle(fontSize: 0.7, color: Colors.grey[400], decoration: TextDecoration.lineThrough),),)
-                  ),
-                )
-              ],
-            )*/
           ],
         ),
       ),
