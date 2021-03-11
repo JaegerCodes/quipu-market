@@ -18,7 +18,7 @@ class _MarketPageState extends State<MarketPage> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
+    // final width = MediaQuery.of(context).size.width;
 
     return SafeArea(
       child: Scaffold(
@@ -96,10 +96,15 @@ class _MarketPageState extends State<MarketPage> {
             ),
             // Grid Galeria Ropa
             SliverStaggeredGrid.countBuilder(crossAxisCount: 2,
-              itemBuilder: (context, index) => ProductCard(width: width, product: products[index]),
-              staggeredTileBuilder: (index) => StaggeredTile.extent(1, 150 + (height*0.15)),
+              itemBuilder: (context, index) => ProductCard(product: products[index]),
+              staggeredTileBuilder: (index) => StaggeredTile.count(1, 1.3),
               itemCount: products.length,
             )
+            /*SliverStaggeredGrid.countBuilder(crossAxisCount: 2,
+              itemBuilder: (context, index) => ProductCard(product: products[index]),
+              staggeredTileBuilder: (index) => StaggeredTile.extent(1, 150 + (height*0.15)),
+              itemCount: products.length,
+            ),*/
           ],
         ),
       ),

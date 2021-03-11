@@ -2,9 +2,8 @@
 import 'package:flutter/material.dart';
 
 class ProductCard extends StatefulWidget {
-  ProductCard({this.width = 0, this.product});
+  ProductCard({this.product});
 
-  final double width;
   final Map? product;
 
   @override
@@ -23,7 +22,7 @@ class _ProductCardState extends State<ProductCard> {
         child: Column(
           children: [
             FadeInImage(
-              width: widget.width/2,
+              width: double.infinity,
               height: 150,
               placeholder: AssetImage('assets/no-image.jpg'),
               image: NetworkImage( product["url"] ),
@@ -31,7 +30,28 @@ class _ProductCardState extends State<ProductCard> {
             ),
             SizedBox(height: 10,),
             Container(width: double.infinity, child: Text(product["title"], maxLines: 2, textAlign: TextAlign.start,)),
-            Stack(
+            SizedBox(height: 1,),
+            Align(
+              alignment: Alignment.topLeft,
+              child: Container(
+                child: FittedBox(
+                  fit: BoxFit.fitWidth, 
+                  child: RichText(
+                    textAlign: TextAlign.start,
+                    maxLines: 1,
+                    text: TextSpan(
+                      text: 'S/200.00',
+                      style: DefaultTextStyle.of(context).style.copyWith(color: Colors.blue),
+                      children: <TextSpan> [
+                        TextSpan(text: '  '),
+                        TextSpan(text: 'S/320.00', style: DefaultTextStyle.of(context).style.copyWith(color: Colors.grey[400], decoration: TextDecoration.lineThrough)),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            )
+            /*Stack(
               children: [
                 Align(
                   alignment: Alignment.topLeft,
@@ -50,7 +70,7 @@ class _ProductCardState extends State<ProductCard> {
                   ),
                 )
               ],
-            )
+            )*/
           ],
         ),
       ),
