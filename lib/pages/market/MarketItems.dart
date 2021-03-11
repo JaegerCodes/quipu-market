@@ -76,3 +76,13 @@ final List<Map> products = <Map> [
   { "id": "9", "url": "https://i.pinimg.com/originals/c2/c7/df/c2c7df77babc1599a6991acbcc8bd02b.jpg", "title" : "Zara United States Collection" },
   { "id": "10", "url": "https://i.pinimg.com/originals/cb/4d/d0/cb4dd04a9627929f0cb687ab57d5eb55.jpg", "title" : "Zapatpos Negros Zara men's" },
 ];
+class GridItemModel {
+  String longtext;
+  GlobalKey? itemKey;
+  double width = 0;
+  double height = 0;
+
+  GridItemModel(this.longtext) {
+    itemKey = GlobalKey();
+  }
+}

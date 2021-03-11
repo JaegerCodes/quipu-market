@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:quipumarket/pages/market/MarketItems.dart';
 import 'package:quipumarket/widgets/Buttons.dart';
 import 'package:quipumarket/widgets/Slivers.dart';
@@ -94,19 +95,10 @@ class _MarketPageState extends State<MarketPage> {
                 ),
             ),
             // Grid Galeria Ropa
-            SliverGrid(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 0.75
-              ),
-
-              delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
-                  return ProductCard(
-                    width: width, product: products[index]
-                  );
-                },
-                childCount: products.length,
-              ),
+            SliverStaggeredGrid.countBuilder(crossAxisCount: 2,
+              itemBuilder: (context, index) => ProductCard(width: width, product: products[index]),
+              staggeredTileBuilder: (index) => StaggeredTile.extent(1, 150 + (height*0.15)),
+              itemCount: products.length,
             )
           ],
         ),

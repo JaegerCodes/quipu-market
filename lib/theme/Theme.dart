@@ -6,8 +6,8 @@ import 'package:quipumarket/theme/TextTheme.dart';
 
 
 ThemeData theme = ThemeData(
+  visualDensity: VisualDensity.adaptivePlatformDensity,
   brightness: Brightness.light,
-  visualDensity: VisualDensity(vertical: 0.5, horizontal: 0.5),
   primarySwatch: MaterialColor(
     0xffDEDEDE,
     <int, Color> {
