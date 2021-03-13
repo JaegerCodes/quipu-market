@@ -19,7 +19,7 @@ class _MarketPageState extends State<MarketPage> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-    // final width = MediaQuery.of(context).size.width;
+    final width = MediaQuery.of(context).size.width;
 
     return SafeArea(
       child: Scaffold(
@@ -80,10 +80,10 @@ class _MarketPageState extends State<MarketPage> {
                 flexibleSpace: Stack(
                   children: <Widget> [
                     Positioned.fill(
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 4),
+                      child: Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(4.2),
                           child: FadeInImage(
                             placeholder: AssetImage('assets/no-image.jpg'),
                             image: NetworkImage("https://thefashionlaw.com/wp-content/uploads/2020/03/Zara-ad-campaign-3.jpg"),
@@ -133,9 +133,9 @@ class _MarketPageState extends State<MarketPage> {
                 ),
             ),
             
-            
             // Grid Galeria Ropa
-            /*SliverStaggeredGrid.countBuilder(crossAxisCount: 2,
+            /*SliverStaggeredGrid.countBuilder(
+              crossAxisCount: 2,
               itemBuilder: (context, index) => ProductCard(product: products[index]),
               mainAxisSpacing: 8,
               staggeredTileBuilder: (index) => StaggeredTile.count(1, 1.249),
@@ -143,15 +143,16 @@ class _MarketPageState extends State<MarketPage> {
               itemCount: products.length,
             ) // Instagram */
             
-            /*SliverStaggeredGrid.countBuilder(crossAxisCount: 2,
-              itemBuilder: (context, index) => ProductCard(product: products[index]),
+            /*SliverStaggeredGrid.countBuilder(
+              crossAxisCount: 2,
+              itemBuilder: (context, index) => SizedBox.expand(child: ProductCard(product: products[index]),),
               staggeredTileBuilder: (index) => StaggeredTile.count(1, 1.3),
               itemCount: products.length,
             )*/
-            SliverStaggeredGrid.countBuilder(crossAxisCount: 2,
-              mainAxisSpacing: 8,
+            SliverStaggeredGrid.countBuilder(
+              crossAxisCount: 2,
               itemBuilder: (context, index) => ProductCard(product: products[index]),
-              staggeredTileBuilder: (index) => StaggeredTile.extent(1, (height * 0.25) + 12 + (height*0.11)),
+              staggeredTileBuilder: (index) => StaggeredTile.extent(1, 230),
               itemCount: products.length,
             ),
           ],

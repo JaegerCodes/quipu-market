@@ -13,50 +13,63 @@ class ProductCard extends StatefulWidget {
 class _ProductCardState extends State<ProductCard> {
   @override
   Widget build(BuildContext context) {
-    final imageHeigth = MediaQuery.of(context).size.height * 0.25;
+    final height = MediaQuery.of(context).size.height;
 
     final product = widget.product?? { "id": "", "url": "", "title" : "" };
     
-    return Container(
-      padding: EdgeInsets.only(left: 4, top: 8, right: 4),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(5),
-        child: Column(
-          children: [
-            FadeInImage(
-              width: double.infinity,
-              height: imageHeigth,
-              placeholder: AssetImage('assets/no-image.jpg'),
-              image: NetworkImage( product["url"] ),
-              fit: BoxFit.cover,
-            ),
-            SizedBox(height: 10,),
-            Container(width: double.infinity, child: Text(product["title"], maxLines: 2, textAlign: TextAlign.start,)),
-            SizedBox(height: 2,),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Container(
-                child: FittedBox(
-                  fit: BoxFit.fitWidth, 
-                  child: RichText(
-                    textAlign: TextAlign.start,
-                    maxLines: 1,
-                    text: TextSpan(
-                      text: 'S/200.00',
-                      style: DefaultTextStyle.of(context).style.copyWith(color: Colors.blue),
-                      children: <TextSpan> [
-                        TextSpan(text: '  '),
-                        TextSpan(text: 'S/320.00', style: DefaultTextStyle.of(context).style.copyWith(color: Colors.grey[400], decoration: TextDecoration.lineThrough)),
-                      ],
-                    ),
+    return ConstrainedBox(
+      constraints: BoxConstraints(
+        maxHeight: height*0.5,
+      ),
+      child: Container(
+        margin: EdgeInsets.all(4),
+        child: ClipRRect(
+            borderRadius: BorderRadius.circular(4.2),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(4.2),
+                  child: FadeInImage(
+                    width: double.infinity,
+                    height: 150,
+                    placeholder: AssetImage('assets/no-image.jpg'),
+                    image: NetworkImage( product["url"] ),
+                    fit: BoxFit.cover,
                   ),
                 ),
-              ),
-            )
-          ],
-        ),
+                SizedBox(height: 5,),
+                Flexible(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      SizedBox(child: Text(product["title"], maxLines: 2, textAlign: TextAlign.start, textHeightBehavior: TextHeightBehavior(applyHeightToLastDescent: true),)),
+                      SizedBox(height: 5,),
+                      RichText(
+                        textAlign: TextAlign.start,
+                        maxLines: 1,
+                        text: TextSpan(
+                          text: 'S/200.00',
+                          style: DefaultTextStyle.of(context).style.copyWith(color: Colors.blue),
+                          children: <TextSpan> [
+                            TextSpan(text: '  '),
+                            TextSpan(text: 'S/320.00', style: DefaultTextStyle.of(context).style.copyWith(color: Colors.grey[400], decoration: TextDecoration.lineThrough,),),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
       ),
     );
+  
   }
 }
 
