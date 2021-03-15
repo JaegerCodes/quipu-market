@@ -7,7 +7,7 @@ import 'package:quipumarket/pages/market/MarketItems.dart';
 import 'package:quipumarket/theme/Colors.dart';
 import 'package:quipumarket/widgets/Buttons.dart';
 import 'package:quipumarket/widgets/Slivers.dart';
-
+import 'package:quipumarket/theme/Dimens.dart';
 class MarketPage extends StatefulWidget {
   MarketPage();
 
@@ -19,7 +19,6 @@ class _MarketPageState extends State<MarketPage> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
 
     return SafeArea(
       child: Scaffold(
@@ -83,7 +82,7 @@ class _MarketPageState extends State<MarketPage> {
                       child: Padding(
                         padding: const EdgeInsets.all(4.0),
                         child: ClipRRect(
-                          borderRadius: BorderRadius.circular(4.2),
+                          borderRadius: borderRadius,
                           child: FadeInImage(
                             placeholder: AssetImage('assets/no-image.jpg'),
                             image: NetworkImage("https://thefashionlaw.com/wp-content/uploads/2020/03/Zara-ad-campaign-3.jpg"),

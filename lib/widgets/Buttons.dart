@@ -1,104 +1,9 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:quipumarket/models/MarketConfiguration.dart';
 import 'package:quipumarket/theme/Colors.dart';
 import 'package:quipumarket/theme/Dimens.dart';
-
-class ShopButton extends StatefulWidget {
-
-  ShopButton.blue({
-    this.width = 0,
-    this.title = "",
-    this.background   = ColorTheme.BLUE_500,
-    this.disableColor = ColorTheme.BLUE_100,
-    this.lightColor   = ColorTheme.WHITE_50,
-    this.darkColor    = ColorTheme.WHITE_50,
-    this.withFittedBox = false,
-  });
-
-  final double width;
-  final String title;
-  final Color background;
-  final Color disableColor;
-  final Color lightColor;
-  final Color darkColor;
-  final bool withFittedBox;
- 
-  @override
-  _ShopButtonState createState() => _ShopButtonState();
-}
-
-class _ShopButtonState extends State<ShopButton> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: horizontalScaffoldPadding(context),
-      width: widget.width,
-      child: widget.withFittedBox
-      ? FittedBox(child: _getButtonContainer(),)
-      : _getButtonContainer()
-    );
-  }
-
-  ElevatedButton _getButtonContainer() {
-    return ElevatedButton(
-      style: _buttonStyle(),
-      onPressed: () {},
-      child: Text(widget.title.toUpperCase(), style: _textStyle()),
-    );
-  }
-
-  ButtonStyle _buttonStyle() {
-    return ButtonStyle(
-      backgroundColor: MaterialStateProperty.resolveWith<Color>((states) {
-        if (states.contains(MaterialState.disabled)) {
-          return widget.disableColor;
-        }
-        return widget.background;
-    }));
-  }
-
-  TextStyle _textStyle() {
-    
-    bool darkModeOn = Theme.of(context).brightness == Brightness.dark;
-
-    return TextStyle(
-      color: darkModeOn? widget.darkColor : widget.lightColor
-    );
-  }
-}
-
-class StyledButton extends StatelessWidget {
-  const StyledButton({this.width = 0, this.title = "", this.background = Colors.white});
-
-  final double width;
-  final String title;
-  final Color background;
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-        elevation: 0,
-        borderRadius: BorderRadius.all(Radius.circular(8)),
-        color: Colors.white,
-        child: InkWell(
-          onTap: () {},
-          hoverColor: ColorTheme.WHITE_100,
-          highlightColor: ColorTheme.BLUE_50,
-          child: Container(
-            decoration: BoxDecoration(
-              border: Border.all(color: ColorTheme.WHITE_900),
-              borderRadius: BorderRadius.all(Radius.circular(8)),
-            ),
-            alignment: Alignment.center,
-            width: width,
-            child: FittedBox(child: Text(this.title, textAlign: TextAlign.center, style: TextStyle(color: Colors.black),)),
-            height: 45.0,
-          ),
-        ),
-      );
-  }
-}
 
 class BlurredButton extends StatefulWidget {
   BlurredButton({this.title = "", this.icon});
@@ -129,6 +34,92 @@ class _BlurredButtonState extends State<BlurredButton> {
         ),
       ),
     );
+  }
+}
+
+class CardMenuButton extends StatefulWidget {
+  CardMenuButton({required this.buttonRadius, required this.icon, required this.text, required this.onClick, this.elevation = 20});
+
+  final BorderRadiusGeometry buttonRadius;
+  final IconData icon;
+  final String text;
+  final double elevation;
+  final void Function() onClick;
+
+  @override
+  _CardMenuButtonState createState() => _CardMenuButtonState();
+}
+
+class _CardMenuButtonState extends State<CardMenuButton> {
+
+  final MarketConfiguration marketConfiguration = dummyConfiguration;
+  final Radius radiusCircular = Radius.circular(cardMenuRadius);
+  late Color colorTheme;
+  late Color backgroundTheme;
+
+  @override
+  void initState() {
+    !marketConfiguration.isDark && marketConfiguration.background != 0xffffffff
+    ? colorTheme = ColorTheme.WHITE_50
+    : colorTheme = ColorTheme.WHITE_900;
+
+    backgroundTheme = Color(marketConfiguration.background);
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return _button();
+  }
+
+  Widget _button() {
+    return ElevatedButton(
+        style: ButtonStyle(
+          elevation:  MaterialStateProperty.resolveWith<double>((states) {
+            if (states.contains(MaterialState.disabled)) {
+              return 1;
+            }
+            if (!states.contains(MaterialState.pressed))
+              return 0;
+            
+            return widget.elevation;
+          }),
+          backgroundColor: MaterialStateProperty.resolveWith<Color>((states) {
+            if (states.contains(MaterialState.disabled)) {
+              return Colors.grey;
+            }
+            return backgroundTheme;
+          }),
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(
+              borderRadius: widget.buttonRadius,
+              //side: BorderSide(color: Colors.white)
+            )
+          )
+        ),
+        onPressed: widget.onClick,
+        child: Container(
+          alignment: Alignment.center,
+          height: double.infinity,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _icon(icon: widget.icon),
+              SizedBox(height: 10,),
+              _text(text: widget.text)
+            ],
+          ),
+        )
+      );
+  }
+
+  Widget _text({required String text}) {
+    return FittedBox(child: Text(text.toUpperCase(), style: TextStyle(color: colorTheme, fontWeight: FontWeight.w900, fontFamily: 'HKGrotesk'),));
+  }
+
+  Widget _icon({required IconData icon}) {
+    return Icon(icon, color: colorTheme,);
   }
 }
 

@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-
+import 'package:quipumarket/theme/Dimens.dart';
 class ProductCard extends StatefulWidget {
   ProductCard({this.product});
 
@@ -24,7 +24,7 @@ class _ProductCardState extends State<ProductCard> {
       child: Container(
         margin: EdgeInsets.all(4),
         child: ClipRRect(
-            borderRadius: BorderRadius.circular(4.2),
+            borderRadius: borderRadius,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.max,

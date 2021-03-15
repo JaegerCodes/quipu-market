@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Quipu Market',
-      initialRoute: 'market',
+      initialRoute: 'home',
       routes: {
         'home' : ( BuildContext context ) => HomePage(),
         'market' : ( BuildContext context ) => MarketPage(),
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       },
       theme: theme,
       darkTheme: darkTheme,
-      themeMode: ThemeMode.dark,
+      themeMode: ThemeMode.light,
     );
   }
 }
